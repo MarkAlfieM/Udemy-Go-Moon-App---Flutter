@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:go_moon/widgets/custom_dropdown_button.dart';
 
 class HomePage extends StatelessWidget {
   late double _deviceHeight, _deviceWidgth;
@@ -13,16 +14,18 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
+            // color: Colors.green,
             padding: EdgeInsets.symmetric(horizontal: _deviceHeight * 0.05),
             height: _deviceHeight,
             width: _deviceWidgth,
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // mainAxisSize: MainAxisSize.max,
-              // crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _pageTitle(),
                 _destinationDropDownWidget(),
+                _travellersInformatiopWidget(),
               ],
             )),
       ),
@@ -31,7 +34,7 @@ class HomePage extends StatelessWidget {
 
   Widget _pageTitle() {
     return Container(
-      color: Colors.green,
+      // color: Colors.green,
       child: const Text(
         "#GoMoon",
         style: TextStyle(
@@ -53,21 +56,25 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _destinationDropDownWidget() {
-    List<String> _items = [
+    return CustomDropdownButtonClass(values: const [
       'James Webb Station',
       'Preneure Station',
-    ];
+    ], width: _deviceWidgth);
+  }
 
-    return DropdownMenuItem(
-        child: DropdownButton(
-      underline: Container(),
-      onChanged: (_) {},
-      items: _items.map((e) {
-        return DropdownMenuItem(
-          child: Text(e),
-          value: e,
-        );
-      }).toList(),
-    ));
+  Widget _travellersInformatiopWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CustomDropdownButtonClass(
+            values: const ['1', '2', '3', '4'], width: _deviceWidgth),
+        CustomDropdownButtonClass(values: const [
+          'Economy',
+          'Businees Class',
+          'First Class',
+          'Elite Shit'
+        ], width: _deviceWidgth),
+      ],
+    );
   }
 }
